@@ -971,6 +971,226 @@
         background: #ffffff;
         color: #000000;
       }
+
+      /* Steam Badges Showcase Bar */
+      .dt-badges-strip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 4px;
+        flex-wrap: wrap;
+      }
+
+      .dt-badge-pill {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        padding: 3px 7px;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: #d0d0dc;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.2s ease;
+        cursor: default;
+      }
+
+      .dt-badge-pill:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+      }
+
+      /* Quick Info Status Tags */
+      .dt-quick-tags {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        padding-top: 2px;
+      }
+
+      .dt-info-tag {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--text-muted);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 2px 7px;
+        border-radius: 3px;
+      }
+
+      /* Live Activity Widget in Sidebar */
+      .dt-activity-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 6px;
+        padding: 8px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .dt-activity-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dt-activity-label {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--text-dim);
+        letter-spacing: 0.5px;
+        font-weight: 700;
+      }
+
+      .dt-activity-live {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: #72d6a1;
+        font-weight: 600;
+      }
+
+      .dt-live-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #72d6a1;
+        box-shadow: 0 0 6px #72d6a1;
+        animation: pulseLive 2s infinite ease-in-out;
+      }
+
+      @keyframes pulseLive {
+        0%, 100% { opacity: 0.5; transform: scale(0.9); }
+        50% { opacity: 1; transform: scale(1.15); }
+      }
+
+      .dt-activity-game {
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .dt-activity-time {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--text-muted);
+      }
+
+      /* Profile Comments / Guestbook Section */
+      .dt-comments-card {
+        gap: 10px;
+      }
+
+      .dt-comments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .dt-comment-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+      }
+
+      .dt-comment-avatar {
+        width: 26px;
+        height: 26px;
+        border-radius: 4px;
+        background: #1a1a24;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+      }
+
+      .dt-comment-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex: 1;
+      }
+
+      .dt-comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dt-comment-author {
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .dt-comment-date {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--text-dim);
+      }
+
+      .dt-comment-text {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: #d0d0dc;
+        line-height: 1.35;
+      }
+
+      .dt-comment-input-wrap {
+        display: flex;
+        gap: 6px;
+        margin-top: 4px;
+      }
+
+      .dt-comment-input {
+        flex: 1;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 4px;
+        padding: 6px 10px;
+        color: #ffffff;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        outline: none;
+      }
+
+      .dt-comment-input:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+      }
+
+      .dt-comment-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        border-radius: 4px;
+        padding: 0 12px;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .dt-comment-btn:hover {
+        background: #ffffff;
+        color: #000000;
+      }
     }
 
     /* ==========================================================================
@@ -1914,6 +2134,11 @@
               <span class="dt-sub-tag kaomoji">~ 𓆩♡𓆪 ~</span>
               <span class="dt-sub-tag">• digital entity • lingering in the shadows</span>
               <span class="dt-sub-tag">+ mawlano [16 anos !!]</span>
+              <div class="dt-quick-tags">
+                <span class="dt-info-tag">📍 Void / Tokyo</span>
+                <span class="dt-info-tag">🕒 02:40 AM UTC-3</span>
+                <span class="dt-info-tag">📶 Online</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1927,6 +2152,11 @@
             <span class="dt-badge-icon">🪶</span>
             <span class="dt-badge-name" id="dt-badge-name">Daeva</span>
             <span class="dt-badge-xp" id="dt-xp">200 XP</span>
+          </div>
+          <div class="dt-badges-strip">
+            <div class="dt-badge-pill" title="7 Years of Service">🛡️ 7 Yrs</div>
+            <div class="dt-badge-pill" title="Tier 5 Daeva">⚔️ Tier 5</div>
+            <div class="dt-badge-pill" title="Angel Collector">✦ 100+</div>
           </div>
         </div>
       </div>
@@ -2013,6 +2243,40 @@
               </div>
             </div>
           </div>
+
+          <!-- Card 3: Profile Comments / Guestbook -->
+          <div class="dt-panel dt-comments-card">
+            <div class="dt-panel-header">
+              <span class="dt-panel-title">PROFILE COMMENTS</span>
+              <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim);">2 Comments</span>
+            </div>
+            <div class="dt-comments-list">
+              <div class="dt-comment-item">
+                <div class="dt-comment-avatar">🕊️</div>
+                <div class="dt-comment-content">
+                  <div class="dt-comment-header">
+                    <span class="dt-comment-author">♡mila</span>
+                    <span class="dt-comment-date">2 hours ago</span>
+                  </div>
+                  <div class="dt-comment-text">angelic aesthetics are top tier 𓆩♡𓆪</div>
+                </div>
+              </div>
+              <div class="dt-comment-item">
+                <div class="dt-comment-avatar">♰</div>
+                <div class="dt-comment-content">
+                  <div class="dt-comment-header">
+                    <span class="dt-comment-author">vortex</span>
+                    <span class="dt-comment-date">Yesterday</span>
+                  </div>
+                  <div class="dt-comment-text">best music playlist on here +rep</div>
+                </div>
+              </div>
+            </div>
+            <div class="dt-comment-input-wrap">
+              <input type="text" id="dt-new-comment-input" class="dt-comment-input" placeholder="Write a comment..." onkeydown="if(event.key==='Enter') postDesktopComment();">
+              <button class="dt-comment-btn" onclick="postDesktopComment();">Post</button>
+            </div>
+          </div>
         </div>
 
         <!-- RIGHT COLUMN (Narrow Sidebar) -->
@@ -2020,6 +2284,16 @@
           <div class="dt-panel dt-status-panel">
             <div class="dt-online-status">
               <span class="dt-status-dot"></span> Currently Online
+            </div>
+
+            <!-- Live Activity Card -->
+            <div class="dt-activity-card">
+              <div class="dt-activity-top">
+                <span class="dt-activity-label">RECENT ACTIVITY</span>
+                <span class="dt-activity-live"><span class="dt-live-dot"></span> In-Game</span>
+              </div>
+              <div class="dt-activity-game">evade</div>
+              <div class="dt-activity-time">42.5 hrs on record • 14/16 Achievements 🏆</div>
             </div>
 
             <!-- Stacked Stats List -->
@@ -2930,6 +3204,35 @@
       document.getElementById("mb-see-more").addEventListener("click", () => {
         showToast("All posts loaded.");
       });
+
+      // Post Desktop Comment Handler
+      window.postDesktopComment = function() {
+        const input = document.getElementById("dt-new-comment-input");
+        if (!input) return;
+        const text = input.value.trim();
+        if (!text) {
+          showToast("Please enter a comment");
+          return;
+        }
+        const commentsList = document.querySelector(".dt-comments-list");
+        if (commentsList) {
+          const newDiv = document.createElement("div");
+          newDiv.className = "dt-comment-item";
+          newDiv.innerHTML = `
+            <div class="dt-comment-avatar">✦</div>
+            <div class="dt-comment-content">
+              <div class="dt-comment-header">
+                <span class="dt-comment-author">Guest</span>
+                <span class="dt-comment-date">Just now</span>
+              </div>
+              <div class="dt-comment-text">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+            </div>
+          `;
+          commentsList.appendChild(newDiv);
+          input.value = "";
+          showToast("Comment posted ✨");
+        }
+      };
 
       // Initialize
       hydrateProfile();
