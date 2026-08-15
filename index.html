@@ -693,21 +693,21 @@
         font-family: var(--font-mono);
         font-size: 0.8rem;
         font-weight: 600;
-        color: #58a6ff;
+        color: #ffffff;
         display: flex;
         align-items: center;
         gap: 6px;
         padding-bottom: 8px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
       }
 
       .dt-status-dot {
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: #58a6ff;
-        box-shadow: 0 0 8px #58a6ff;
+        background: #ffffff;
+        box-shadow: 0 0 8px #ffffff;
       }
 
       /* Stats List */
@@ -1395,7 +1395,9 @@
       }
 
       .mb-tracklist-table .tracklist-row.active td {
-        color: #79c0ff;
+        color: #ffffff;
+        font-weight: 700;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
       }
 
       .mb-track-link {
@@ -1576,39 +1578,40 @@
         font-size: 0.6rem;
       }
 
-      /* Retro Windows 95 Dialog Box */
+      /* Retro Windows Dialog Box (Monochrome Obsidian Style) */
       .mb-win95-box {
-        background: #d4d0c8;
-        border: 2px solid;
-        border-color: #ffffff #404040 #404040 #ffffff;
-        box-shadow: 1px 1px 0px #000000;
-        padding: 2px;
+        background: #0d0d12;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        border-radius: 4px;
+        overflow: hidden;
         font-family: var(--font-mono);
       }
 
       .mb-win95-header {
-        background: #000080;
+        background: #1c1c24;
         color: #ffffff;
-        padding: 2px 4px;
+        padding: 4px 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 0.68rem;
         font-weight: 700;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       }
 
       .mb-win95-btns {
         display: flex;
-        gap: 2px;
+        gap: 3px;
       }
 
       .win-btn {
-        background: #d4d0c8;
-        color: #000000;
-        border: 1px solid;
-        border-color: #ffffff #404040 #404040 #ffffff;
+        background: #282834;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
         font-size: 0.55rem;
-        padding: 0 3px;
+        padding: 1px 4px;
         line-height: 1;
         cursor: pointer;
         font-weight: 700;
@@ -1619,14 +1622,14 @@
       }
 
       .mb-win95-body {
-        background: #ffffff;
-        color: #000000;
-        padding: 6px 8px;
+        background: #08080c;
+        color: #ffffff;
+        padding: 8px 10px;
         font-size: 0.66rem;
         display: flex;
         flex-direction: column;
-        gap: 3px;
-        line-height: 1.35;
+        gap: 4px;
+        line-height: 1.4;
       }
 
       .win-line {
