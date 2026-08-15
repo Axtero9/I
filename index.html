@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@cvfeinn — Personal Profile</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. GLOBAL CONFIG & BASE STYLES
+       ========================================================================== */
+    :root {
+      /* Theme palette defaults (Monochrome Dark) */
+      --bg-dark: #070709;
+      --card-bg: rgba(18, 18, 24, 0.85);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent-glow: rgba(255, 255, 255, 0.15);
+      --text-main: #f0f0f5;
+      --text-muted: #8e8e9f;
+      --text-dim: #5a5a6e;
+      --highlight: #ffffff;
+      --accent-color: #8a99ad;
+      --accent-rgb: 138, 153, 173;
+      
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Cinzel', serif;
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Preset Themes (Toggled by Theme Switcher Dots) */
+    body.theme-rose {
+      --accent-color: #e096b7;
+      --accent-rgb: 224, 150, 183;
+      --accent-glow: rgba(224, 150, 183, 0.25);
+    }
+    body.theme-emerald {
+      --accent-color: #72d6a1;
+      --accent-rgb: 114, 214, 161;
+      --accent-glow: rgba(114, 214, 161, 0.25);
+    }
+    body.theme-cyber {
+      --accent-color: #9d80f5;
+      --accent-rgb: 157, 128, 245;
+      --accent-glow: rgba(157, 128, 245, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(25, 25, 32, 0.95);
+      border: 1px solid var(--accent-color);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow);
+      z-index: 99999;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Common Shared Media Player Element */
+    #shared-audio {
+      display: none;
+    }
+
+    /* ==========================================================================
+       2. DESKTOP LAYOUT (min-width: 768px) — Angel / Wings Style
+       ========================================================================== */
+    @media (min-width: 768px) {
+      .mobile-only {
+        display: none !important;
+      }
+
+      body {
+        background-color: #030305;
+        background-image: 
+          linear-gradient(180deg, rgba(3, 3, 5, 0.45) 0%, rgba(3, 3, 5, 0.75) 100%),
+          url('background.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 30px 20px 60px 20px;
+        position: relative;
+      }
+
+      /* SVG Wing overlays disabled */
+      .angel-wing-left,
+      .angel-wing-right {
+        display: none !important;
+      }
+
+      /* Desktop Container: anchored top-center with generous margins */
+      .desktop-container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 820px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* 1. TOP ROW: Aligned Left-to-Right */
+      .dt-top-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        padding: 4px 6px;
+      }
+
+      .dt-top-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* Avatar with Glowing Angel Halo */
+      .dt-avatar-container {
+        position: relative;
+        width: 74px;
+        height: 74px;
+        flex-shrink: 0;
+        margin-top: 8px;
+      }
+
+      .dt-avatar-halo {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 48px;
+        height: 14px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        box-shadow: 
+          0 0 15px #ffffff,
+          0 0 30px rgba(255, 255, 255, 0.8),
+          inset 0 0 8px #ffffff;
+        pointer-events: none;
+        z-index: 3;
+        animation: haloPulse 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes haloPulse {
+        0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.9; }
+        100% { transform: translateX(-50%) translateY(-2px) scale(1.05); opacity: 1; filter: drop-shadow(0 0 10px #fff); }
+      }
+
+      .dt-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: var(--radius-sm);
+        object-fit: cover;
+        border: 2px solid #ffffff;
+        box-shadow: 
+          0 0 25px rgba(255, 255, 255, 0.7),
+          0 0 45px var(--accent-glow),
+          inset 0 0 15px rgba(255, 255, 255, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .dt-avatar:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0 35px rgba(255, 255, 255, 0.9), 0 0 60px var(--accent-glow);
+      }
+
+      .dt-user-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .dt-username-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .dt-username {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px var(--accent-glow);
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      .dt-taglines-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        line-height: 1.35;
+      }
+
+      .dt-sub-tag {
+        color: var(--text-muted);
+        letter-spacing: 0.5px;
+      }
+      .dt-sub-tag.kaomoji {
+        color: var(--text-main);
+        font-size: 0.78rem;
+      }
+
+      /* Level Badge (Top-Right) */
+      .dt-top-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+      }
+
+      .dt-level-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 0.95rem;
+        color: #ffffff;
+        font-weight: 500;
+      }
+
+      .dt-level-circle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.4), inset 0 0 6px rgba(255,255,255,0.2);
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .dt-badge-sub {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--text-muted);
+      }
+
+      .dt-badge-icon {
+        font-size: 0.95rem;
+      }
+
+      .dt-badge-name {
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      .dt-badge-xp {
+        color: var(--text-dim);
+      }
+
+      /* 2. DECORATIVE QUOTE STRIP */
+      .dt-decorative-bar {
+        width: 100%;
+        text-align: center;
+        padding: 4px 0 8px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .dt-quote-symbols {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        letter-spacing: 4px;
+      }
+
+      .dt-quote-line {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 2px;
+      }
+
+      /* 3. MAIN CONTENT ROW (Two Columns: Left Wider, Right Narrow) */
+      .dt-main-grid {
+        display: grid;
+        grid-template-columns: 1.75fr 1fr;
+        gap: 16px;
+        width: 100%;
+      }
+
+      /* Panels Base */
+      .dt-panel {
+        background: rgba(14, 14, 18, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius-md);
+        padding: 16px 18px;
+        box-shadow: 
+          0 12px 35px rgba(0, 0, 0, 0.5),
+          0 0 1px inset rgba(255, 255, 255, 0.12);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .dt-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 8px;
+      }
+
+      .dt-panel-title {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      /* LEFT COLUMN: Gallery Panel */
+      .dt-left-col {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .gallery-strip {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr 1.2fr;
+        gap: 10px;
+      }
+
+      .gallery-item {
+        position: relative;
+        height: 120px;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.03);
+        cursor: pointer;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(80%) contrast(110%) brightness(85%);
+        transition: filter 0.4s ease, transform 0.4s ease;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.4), 0 0 12px var(--accent-glow);
+      }
+
+      .gallery-item:hover img {
+        filter: grayscale(10%) contrast(110%) brightness(100%);
+        transform: scale(1.06);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .gallery-title {
+        font-family: var(--font-serif);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #ffffff;
+      }
+
+      .gallery-subtitle {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--accent-color);
+      }
+
+      /* Dictionary Card in Slot 3 */
+      .dict-card {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(0,0,0,0.4);
+      }
+
+      .dict-word {
+        font-family: var(--font-serif);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 1px;
+      }
+
+      .dict-def {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--text-muted);
+        line-height: 1.35;
+        margin-top: 4px;
+      }
+
+      /* Favorite Guide Card with Stepped Text & Glowing White Styling */
+      .dt-favorite-card {
+        gap: 12px;
+      }
+
+      .dt-favorite-card .dt-panel-title {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.85), 0 0 20px rgba(255, 255, 255, 0.5);
+      }
+
+      .dt-stepped-box {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-size: 0.95rem;
+        color: #ffffff;
+        text-shadow: 
+          0 0 8px rgba(255, 255, 255, 0.95),
+          0 0 18px rgba(255, 255, 255, 0.75),
+          0 0 32px rgba(255, 255, 255, 0.5);
+        line-height: 1.45;
+        padding: 4px 0;
+      }
+
+      .dt-step-line-1 { padding-left: 0; }
+      .dt-step-line-2 { 
+        padding-left: 20px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+      }
+      .dt-step-line-3 { padding-left: 0; }
+      .dt-step-line-4 { padding-left: 20px; }
+      .dt-step-line-5 { padding-left: 0; }
+
+      .dt-byline-tag {
+        font-family: var(--font-mono);
+        font-style: normal;
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        text-shadow: none;
+      }
+      .dt-byline-tag span {
+        color: #ffffff;
+        font-weight: 500;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+      }
+
+      /* Compact Audio Player in Favorite Card */
+      .dt-now-playing-banner {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-sm);
+        padding: 10px 12px;
+      }
+
+      .desktop-album-art {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-sm);
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      }
+
+      .desktop-track-meta {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .desktop-track-title {
+        font-family: var(--font-sans);
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: #ffffff;
+      }
+
+      .desktop-track-artist {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--accent-color);
+      }
+
+      .desktop-play-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-full);
+        background: rgba(255, 255, 255, 0.9);
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.82rem;
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+      }
+
+      .desktop-play-btn:hover {
+        transform: scale(1.08);
+        background: #ffffff;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      }
+
+      .progress-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        margin-top: 2px;
+      }
+
+      .time-display {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-dim);
+        min-width: 32px;
+      }
+
+      .scrubber-bar {
+        flex: 1;
+        height: 4px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-full);
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .scrubber-bar::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 0 8px rgba(255,255,255,0.8);
+        cursor: pointer;
+      }
+
+      .dt-favorite-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 8px;
+        margin-top: 2px;
+      }
+
+      .dt-compact-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .desktop-link-btn {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        padding: 3px 8px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
+        transition: all 0.2s ease;
+      }
+
+      .desktop-link-btn:hover {
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 10px var(--accent-glow);
+      }
+
+      .dt-star-rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+      }
+
+      .dt-star-rating .stars {
+        color: #f7d070;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+      }
+
+      .dt-star-rating .rating-count {
+        color: var(--text-muted);
+        font-size: 0.7rem;
+      }
+
+      /* RIGHT COLUMN: Sidebar */
+      .dt-right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .dt-status-panel {
+        gap: 14px;
+      }
+
+      .dt-online-status {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #58a6ff;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+      }
+
+      .dt-status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #58a6ff;
+        box-shadow: 0 0 8px #58a6ff;
+      }
+
+      /* Stats List */
+      .dt-stats-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .dt-stat-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.76rem;
+        padding: 4px 6px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        transition: background 0.2s ease;
+      }
+
+      .dt-stat-row:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .dt-stat-label {
+        color: var(--text-muted);
+      }
+
+      .dt-stat-val {
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      /* Groups Section */
+      .dt-groups-section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 10px;
+      }
+
+      .dt-groups-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      .dt-groups-count {
+        color: var(--text-dim);
+        font-size: 0.72rem;
+      }
+
+      .dt-groups-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .dt-group-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 6px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        transition: background 0.2s ease;
+      }
+
+      .dt-group-item:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .dt-group-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        flex-shrink: 0;
+      }
+
+      .dt-group-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        overflow: hidden;
+      }
+
+      .dt-group-name {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .dt-group-members {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--text-dim);
+      }
+
+      /* Desktop Song Playlist Boxes Below Groups */
+      .dt-playlist-section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 10px;
+        margin-top: 4px;
+      }
+
+      .dt-playlist-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+        font-weight: 600;
+      }
+
+      .dt-playlist-count {
+        color: var(--text-dim);
+        font-size: 0.68rem;
+      }
+
+      .dt-playlist-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .dt-song-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 7px 9px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.22s ease;
+      }
+
+      .dt-song-box:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.28);
+        transform: translateX(2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+
+      .dt-song-box.active {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.2), inset 0 0 8px rgba(255, 255, 255, 0.08);
+      }
+
+      .dt-song-box-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow: hidden;
+      }
+
+      .dt-song-box-idx {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-dim);
+        width: 14px;
+        text-align: center;
+      }
+
+      .dt-song-box.active .dt-song-box-idx {
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .dt-song-box-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        overflow: hidden;
+      }
+
+      .dt-song-box-title {
+        font-family: var(--font-sans);
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .dt-song-box-artist {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .dt-song-box-right {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .dt-song-box-len {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--text-dim);
+      }
+
+      .dt-song-box-play {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        font-size: 0.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .dt-song-box:hover .dt-song-box-play {
+        background: #ffffff;
+        color: #000000;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+      }
+
+      .dt-song-box.active .dt-song-box-play {
+        background: #ffffff;
+        color: #000000;
+      }
+    }
+
+    /* ==========================================================================
+       3. MOBILE LAYOUT (max-width: 767px) — Carrd Dark Style
+       ========================================================================== */
+    @media (max-width: 767px) {
+      .desktop-only {
+        display: none !important;
+      }
+
+      body {
+        background-color: #121215;
+        padding: 12px 10px 80px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .mobile-container {
+        width: 100%;
+        max-width: 580px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* 1. TOP TAB BAR */
+      .mobile-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #1c1c22;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: var(--radius-sm);
+        padding: 6px 10px;
+      }
+
+      .pill-tabs {
+        display: flex;
+        gap: 6px;
+      }
+
+      .pill-tab {
+        padding: 5px 12px;
+        border-radius: 4px;
+        background: #282832;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-family: var(--font-sans);
+        font-size: 0.76rem;
+        color: #d0d0dc;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .pill-tab.active {
+        background: #363644;
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.25);
+        font-weight: 500;
+      }
+
+      .theme-dots {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .theme-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      .theme-dot:hover {
+        transform: scale(1.25);
+      }
+      .dot-silver { background: #ffffff; box-shadow: 0 0 6px rgba(255,255,255,0.8); }
+      .dot-rose { background: #888894; }
+      .dot-emerald { background: #3a3a44; }
+      .dot-cyber { background: #1a1a20; }
+
+      /* 2. HEADER CARD (Carrd style with Spiral & Links) */
+      .mobile-header-card {
+        position: relative;
+        background: #18181f;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: var(--radius-sm);
+        padding: 14px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+        overflow: hidden;
+      }
+
+      /* Concentric Spiral Graphic Backdrop on right */
+      .spiral-backdrop {
+        position: absolute;
+        right: -30px;
+        top: -30px;
+        width: 210px;
+        height: 210px;
+        opacity: 0.35;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .mobile-header-left {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .mobile-profile-main {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .mobile-avatar {
+        width: 68px;
+        height: 68px;
+        border-radius: 6px;
+        object-fit: cover;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        flex-shrink: 0;
+      }
+
+      .mobile-user-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .mobile-username-row {
+        font-family: var(--font-sans);
+        font-size: 0.84rem;
+        color: #ffffff;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+
+      .online-badge {
+        color: #ffffff;
+        font-weight: 400;
+      }
+
+      .mobile-status {
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        color: #a0a0b0;
+      }
+      .mobile-status span {
+        color: #ffffff;
+      }
+
+      /* Note Box */
+      .mobile-note-box {
+        background: rgba(10, 10, 14, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 4px;
+        padding: 8px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+      }
+
+      .note-badge-title {
+        display: inline-block;
+        padding: 1px 6px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 2px;
+        font-size: 0.68rem;
+        color: #ffffff;
+        width: fit-content;
+        margin-bottom: 2px;
+      }
+
+      .note-content-line {
+        color: #d0d0d8;
+        line-height: 1.35;
+      }
+
+      /* Links Box on Right */
+      .mobile-header-right {
+        position: relative;
+        z-index: 1;
+        width: 110px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .mb-links-box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .mb-links-heading-wrap {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 4px;
+      }
+
+      .mb-links-title {
+        font-family: var(--font-sans);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+      }
+
+      .mb-links-line {
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      .mb-links-table {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(14, 14, 18, 0.85);
+        backdrop-filter: blur(8px);
+      }
+
+      .mb-link-row {
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        color: #ffffff;
+        padding: 3px 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        cursor: pointer;
+        display: block;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+
+      .mb-link-row:last-child {
+        border-bottom: none;
+      }
+
+      .mb-link-row:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+      }
+
+      /* 3. MAIN SECTION: 2 COLUMNS (Player on left, Posts on right) */
+      .mobile-main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: 10px;
+        width: 100%;
+      }
+
+      @media (max-width: 480px) {
+        .mobile-main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* LEFT COLUMN: Player Column */
+      .mobile-player-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .mb-msg-btn {
+        width: 100%;
+        background: #25252e;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 4px;
+        padding: 6px;
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        color: #ffffff;
+        font-weight: 500;
+        text-align: center;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .mb-msg-btn:hover {
+        background: #32323e;
+      }
+
+      .mb-player-card {
+        background: #18181f;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 4px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      /* Video/Album Art Thumbnail */
+      .mb-video-thumb {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #0a0a0d;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .mb-thumb-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .mb-thumb-overlay {
+        position: absolute;
+        bottom: 6px;
+        left: 8px;
+        display: flex;
+        flex-direction: column;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+      }
+
+      .mb-thumb-title {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        font-size: 0.88rem;
+        color: #ffffff;
+      }
+
+      .mb-thumb-artist {
+        font-family: var(--font-sans);
+        font-size: 0.65rem;
+        color: #d0d0dc;
+      }
+
+      .mb-thumb-play-icon {
+        position: absolute;
+        bottom: 6px;
+        right: 8px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        cursor: pointer;
+      }
+
+      /* Player Action Buttons */
+      .mb-player-actions {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 6px;
+      }
+
+      .mb-action-play {
+        background: #ffffff;
+        color: #000000;
+        border: none;
+        border-radius: 3px;
+        padding: 5px 8px;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+
+      .mb-action-library {
+        background: #25252e;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+        padding: 5px 8px;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+
+      /* Tracklist Table */
+      .mb-tracklist-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+      }
+
+      .mb-tracklist-table th {
+        color: #ffffff;
+        font-weight: 700;
+        padding: 3px 2px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        text-align: left;
+      }
+
+      .mb-tracklist-table td {
+        padding: 4px 2px;
+        color: #ffffff;
+        cursor: pointer;
+      }
+
+      .mb-tracklist-table .tracklist-row:hover td {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .mb-tracklist-table .tracklist-row.active td {
+        color: #79c0ff;
+      }
+
+      .mb-track-link {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      /* RIGHT COLUMN: Posts Column */
+      .mobile-posts-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .mb-posts-header-banner {
+        background: #44444e;
+        border-radius: 3px;
+        padding: 6px 10px;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: center;
+      }
+
+      .mb-posts-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .mb-post-card {
+        background: #18181f;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .mb-post-title-pill {
+        background: #25252e;
+        padding: 4px 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .mb-post-body {
+        padding: 8px;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        color: #d0d0d8;
+        line-height: 1.35;
+      }
+
+      .mb-see-more {
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        color: #ffffff;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        cursor: pointer;
+        padding: 2px 0;
+      }
+
+      /* 4. TWO-TONE BOTTOM STICKY BAR */
+      .mobile-sticky-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #1a1a20;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 999;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+      }
+
+      .mb-sticky-left {
+        padding: 8px 12px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1;
+      }
+
+      .mb-sticky-track {
+        color: #ffffff;
+        text-decoration: underline;
+        font-weight: 600;
+      }
+
+      .mb-sticky-artist {
+        color: #a0a0b0;
+      }
+
+      .mb-sticky-right {
+        background: #cfcfd6;
+        color: #000000;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .mb-sticky-play-btn {
+        background: none;
+        border: none;
+        color: #000000;
+        font-size: 0.75rem;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .mb-sticky-scrubber {
+        width: 50px;
+        height: 3px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: #888890;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+
+      .mb-sticky-scrubber::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #000000;
+        cursor: pointer;
+      }
+
+      .mb-sticky-time {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #000000;
+      }
+
+      /* 5. FOOTER */
+      .mobile-footer {
+        text-align: center;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        color: #888894;
+        margin-top: 6px;
+        padding-bottom: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast Notification element -->
+  <div id="toast" class="toast">Copied to clipboard!</div>
+
+  <!-- Shared HTML5 Audio Engine -->
+  <audio id="shared-audio" preload="metadata"></audio>
+
+  <!-- ==========================================================================
+       DESKTOP VIEW HTML (min-width: 768px)
+       ========================================================================== -->
+  <div class="desktop-only">
+    <!-- Centered Content Column -->
+    <div class="desktop-container">
+      
+      <!-- 1. TOP ROW (Aligned left-to-right, not centered) -->
+      <div class="dt-top-row">
+        <div class="dt-top-left">
+          <div class="dt-avatar-container">
+            <div class="dt-avatar-halo"></div>
+            <img id="dt-avatar" src="avatar.jpg" alt="avatar" class="dt-avatar">
+          </div>
+          <div class="dt-user-meta">
+            <div class="dt-username-wrap">
+              <h1 id="dt-username" class="dt-username">♡cvfeinn .</h1>
+            </div>
+            <div class="dt-taglines-list">
+              <span class="dt-sub-tag kaomoji">~ 𓆩♡𓆪 ~</span>
+              <span class="dt-sub-tag">• digital entity • lingering in the shadows</span>
+              <span class="dt-sub-tag">+ mawlano [16 anos !!]</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dt-top-right">
+          <div class="dt-level-row">
+            <span>Level</span>
+            <span class="dt-level-circle" id="dt-level">79</span>
+          </div>
+          <div class="dt-badge-sub">
+            <span class="dt-badge-icon">🪶</span>
+            <span class="dt-badge-name" id="dt-badge-name">Daeva</span>
+            <span class="dt-badge-xp" id="dt-xp">200 XP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. DECORATIVE QUOTE STRIP -->
+      <div class="dt-decorative-bar">
+        <div class="dt-quote-symbols">† ˙ ˖ 𓆩 ✞ 𓆪 ˖ ˙ †</div>
+        <p id="dt-quote" class="dt-quote-line">... Sometimes an unseen angel is found in the dark ...</p>
+      </div>
+
+      <!-- 3. MAIN CONTENT ROW (Two Columns: Left Wider, Right Narrow) -->
+      <div class="dt-main-grid">
+        <!-- LEFT COLUMN (Wide) -->
+        <div class="dt-left-col">
+          <!-- Card 1: Horizontal Gallery Strip -->
+          <div class="dt-panel">
+            <div class="dt-panel-header">
+              <span class="dt-panel-title">SEEN THIS ANGEL?</span>
+            </div>
+            <div id="dt-gallery-strip" class="gallery-strip">
+              <div class="gallery-item">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='260' viewBox='0 0 200 260'><rect width='200' height='260' fill='%2307070b'/><path d='M100,20 L100,240 M40,80 L160,80 M70,50 L130,110 M70,110 L130,50' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' opacity='0.75'/><circle cx='100' cy='80' r='18' stroke='%23ffffff' stroke-width='1.5' fill='none' opacity='0.85'/><text x='50%' y='92%' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-size='10' letter-spacing='2'>seen this Angel?</text></svg>" alt="seen this Angel?">
+                <div class="gallery-overlay">
+                  <div class="gallery-title">seen this Angel?</div>
+                </div>
+              </div>
+              <div class="gallery-item">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'><rect width='260' height='260' fill='%230b0b10'/><path d='M230,60 C180,30 110,60 70,130 C30,190 40,240 60,250 C70,220 90,170 140,120 C180,80 210,70 230,60 Z' fill='%23ffffff' opacity='0.85'/><path d='M240,100 C190,80 130,110 90,170 C60,210 70,245 90,250 C100,220 120,180 160,140 C190,110 220,105 240,100 Z' fill='%238e8e9f' opacity='0.5'/></svg>" alt="celestial">
+                <div class="gallery-overlay">
+                  <div class="gallery-title">celestial</div>
+                </div>
+              </div>
+              <div class="gallery-item dict-card">
+                <div class="dict-word">angel</div>
+                <div class="dict-def">(n.) the girl who makes your heart jump; the girl you'll need for a long time, wherever you go.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Favorite Guide Section -->
+          <div class="dt-panel dt-favorite-card">
+            <div class="dt-panel-header">
+              <span class="dt-panel-title" id="dt-fav-label">Favorite Guide</span>
+            </div>
+            
+            <!-- Stepped Repeated Typography -->
+            <div class="dt-stepped-box">
+              <div class="dt-step-line-1">angel baby</div>
+              <div class="dt-step-line-2">
+                <span>angel baby</span>
+                <span class="dt-byline-tag">Created by <span id="dt-fav-byline">♡cvfeinn</span></span>
+              </div>
+              <div class="dt-step-line-3">angel baby</div>
+              <div class="dt-step-line-4">angel baby</div>
+              <div class="dt-step-line-5">angel baby</div>
+            </div>
+
+            <!-- Audio Player Banner -->
+            <div class="dt-now-playing-banner">
+              <img id="dt-album-art" src="album.jpg" alt="Album Art" class="desktop-album-art">
+              <div class="desktop-track-meta">
+                <div id="dt-track-title" class="desktop-track-title">Star Shopping</div>
+                <div id="dt-track-artist" class="desktop-track-artist">Lil Peep • Track 1</div>
+                <div class="progress-container">
+                  <span id="dt-time-current" class="time-display">00:00</span>
+                  <input type="range" id="dt-scrubber" class="scrubber-bar" value="0" min="0" max="100">
+                  <span id="dt-time-duration" class="time-display">03:50</span>
+                </div>
+              </div>
+              <button id="dt-play-btn" class="desktop-play-btn" title="Play/Pause" onclick="togglePlay();">▶</button>
+            </div>
+
+            <!-- Footer with Links and Star Rating -->
+            <div class="dt-favorite-footer">
+              <div id="dt-links-row" class="dt-compact-links">
+                <button class="desktop-link-btn" onclick="navigator.clipboard.writeText('cvfeinn'); showToast('Copied Discord handle: cvfeinn');">Discord: cvfeinn</button>
+                <a href="https://github.com/Axtero9" target="_blank" rel="noopener" class="desktop-link-btn">GitHub</a>
+                <a href="https://www.instagram.com/cvfeinn/" target="_blank" rel="noopener" class="desktop-link-btn">Instagram</a>
+                <a href="https://open.spotify.com/" target="_blank" rel="noopener" class="desktop-link-btn">Spotify</a>
+              </div>
+              <div class="dt-star-rating">
+                <span class="stars">★★★</span>
+                <span class="rating-count" id="dt-rating-count">26 ratings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (Narrow Sidebar) -->
+        <div class="dt-right-col">
+          <div class="dt-panel dt-status-panel">
+            <div class="dt-online-status">
+              <span class="dt-status-dot"></span> Currently Online
+            </div>
+
+            <!-- Stacked Stats List -->
+            <div class="dt-stats-list" id="dt-stats-list">
+              <div class="dt-stat-row">
+                <span class="dt-stat-label">Inventory</span>
+                <span class="dt-stat-val">✦</span>
+              </div>
+              <div class="dt-stat-row">
+                <span class="dt-stat-label">Reviews</span>
+                <span class="dt-stat-val">4</span>
+              </div>
+              <div class="dt-stat-row">
+                <span class="dt-stat-label">Guides</span>
+                <span class="dt-stat-val">153</span>
+              </div>
+              <div class="dt-stat-row">
+                <span class="dt-stat-label">Artwork</span>
+                <span class="dt-stat-val">1</span>
+              </div>
+            </div>
+
+            <!-- Groups Section -->
+            <div class="dt-groups-section">
+              <div class="dt-groups-header">
+                <span class="dt-groups-label">GROUPS</span>
+                <span class="dt-groups-count" id="dt-groups-count">3</span>
+              </div>
+              <div class="dt-groups-list" id="dt-groups-list">
+                <div class="dt-group-item">
+                  <div class="dt-group-icon">🕊️</div>
+                  <div class="dt-group-meta">
+                    <div class="dt-group-name">Angel ༉‧₊˚</div>
+                    <div class="dt-group-members">37 Members</div>
+                  </div>
+                </div>
+                <div class="dt-group-item">
+                  <div class="dt-group-icon">♰</div>
+                  <div class="dt-group-meta">
+                    <div class="dt-group-name">.•!•.</div>
+                    <div class="dt-group-members">2 Members</div>
+                  </div>
+                </div>
+                <div class="dt-group-item">
+                  <div class="dt-group-icon">✧</div>
+                  <div class="dt-group-meta">
+                    <div class="dt-group-name">天使</div>
+                    <div class="dt-group-members">4 Members</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Music Playlist Box Section Below Groups -->
+            <div class="dt-playlist-section">
+              <div class="dt-playlist-header">
+                <span class="dt-playlist-label">MUSIC PLAYLIST</span>
+                <span class="dt-playlist-count">4 TRACKS</span>
+              </div>
+              <div class="dt-playlist-list" id="dt-playlist-boxes">
+                <div class="dt-song-box active" data-index="0" onclick="window.loadTrack(0, true);">
+                  <div class="dt-song-box-left">
+                    <span class="dt-song-box-idx">1</span>
+                    <div class="dt-song-box-meta">
+                      <span class="dt-song-box-title">Star Shopping</span>
+                      <span class="dt-song-box-artist">Lil Peep</span>
+                    </div>
+                  </div>
+                  <div class="dt-song-box-right">
+                    <span class="dt-song-box-len">3:50</span>
+                    <span class="dt-song-box-play">▶</span>
+                  </div>
+                </div>
+                <div class="dt-song-box" data-index="1" onclick="window.loadTrack(1, true);">
+                  <div class="dt-song-box-left">
+                    <span class="dt-song-box-idx">2</span>
+                    <div class="dt-song-box-meta">
+                      <span class="dt-song-box-title">Dark Red</span>
+                      <span class="dt-song-box-artist">Steve Lacy</span>
+                    </div>
+                  </div>
+                  <div class="dt-song-box-right">
+                    <span class="dt-song-box-len">3:47</span>
+                    <span class="dt-song-box-play">▶</span>
+                  </div>
+                </div>
+                <div class="dt-song-box" data-index="2" onclick="window.loadTrack(2, true);">
+                  <div class="dt-song-box-left">
+                    <span class="dt-song-box-idx">3</span>
+                    <div class="dt-song-box-meta">
+                      <span class="dt-song-box-title">Mrs Magic</span>
+                      <span class="dt-song-box-artist">Strawberry Guy</span>
+                    </div>
+                  </div>
+                  <div class="dt-song-box-right">
+                    <span class="dt-song-box-len">2:35</span>
+                    <span class="dt-song-box-play">▶</span>
+                  </div>
+                </div>
+                <div class="dt-song-box" data-index="3" onclick="window.loadTrack(3, true);">
+                  <div class="dt-song-box-left">
+                    <span class="dt-song-box-idx">4</span>
+                    <div class="dt-song-box-meta">
+                      <span class="dt-song-box-title">Dark Beach</span>
+                      <span class="dt-song-box-artist">Pastel Ghost</span>
+                    </div>
+                  </div>
+                  <div class="dt-song-box-right">
+                    <span class="dt-song-box-len">1:33</span>
+                    <span class="dt-song-box-play">▶</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MOBILE VIEW HTML (max-width: 767px)
+       ========================================================================== -->
+  <div class="mobile-only mobile-container">
+    
+    <!-- 1. TOP TAB BAR -->
+    <div class="mobile-top-bar">
+      <div class="pill-tabs">
+        <button class="pill-tab active" data-tab="date">📅 Feb 20</button>
+        <button class="pill-tab" data-tab="byf">💬 BYF</button>
+        <button class="pill-tab" data-tab="likes">⭐ Likes</button>
+      </div>
+      <div class="theme-dots">
+        <div class="theme-dot dot-silver" data-theme="default" title="Monochrome"></div>
+        <div class="theme-dot dot-rose" data-theme="theme-rose" title="Slate"></div>
+        <div class="theme-dot dot-emerald" data-theme="theme-emerald" title="Dark Charcoal"></div>
+        <div class="theme-dot dot-cyber" data-theme="theme-cyber" title="Deep Obsidian"></div>
+      </div>
+    </div>
+
+    <!-- 2. HEADER CARD (Carrd style with Spiral & Links) -->
+    <div class="mobile-header-card">
+      <!-- Concentric Spiral Graphic Backdrop -->
+      <svg class="spiral-backdrop" viewBox="0 0 200 200" fill="none">
+        <circle cx="140" cy="100" r="18" stroke="#ffffff" stroke-width="7" opacity="0.3"/>
+        <circle cx="140" cy="100" r="36" stroke="#ffffff" stroke-width="7" opacity="0.25"/>
+        <circle cx="140" cy="100" r="54" stroke="#ffffff" stroke-width="7" opacity="0.2"/>
+        <circle cx="140" cy="100" r="72" stroke="#ffffff" stroke-width="7" opacity="0.15"/>
+        <circle cx="140" cy="100" r="90" stroke="#ffffff" stroke-width="7" opacity="0.12"/>
+        <circle cx="140" cy="100" r="108" stroke="#ffffff" stroke-width="7" opacity="0.08"/>
+      </svg>
+
+      <!-- Left Column: Avatar, User Details, Note Box -->
+      <div class="mobile-header-left">
+        <div class="mobile-profile-main">
+          <img id="mb-avatar" src="avatar.jpg" alt="avatar" class="mobile-avatar">
+          <div class="mobile-user-details">
+            <div class="mobile-username-row">
+              <span>user:</span>
+              <strong id="mb-username">@cvfeinn</strong>
+              <span class="online-badge">• Online now</span>
+            </div>
+            <div class="mobile-status">Status : Playing : <span id="mb-status-playing">evade</span></div>
+          </div>
+        </div>
+
+        <!-- Note Box -->
+        <div class="mobile-note-box">
+          <span class="note-badge-title">Note :</span>
+          <div class="note-content-line" id="mb-note-line1">⇢ 16 anos !!, Straight</div>
+          <div class="note-content-line" id="mb-note-line2">✧ pron: dy/dx ! ☀️ Cancer 🌙 Peixes ↑ capri.</div>
+          <div id="mb-tab-content" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- Right Column: Links Box -->
+      <div class="mobile-header-right">
+        <div class="mb-links-box">
+          <div class="mb-links-heading-wrap">
+            <span class="mb-links-title">Links</span>
+            <div class="mb-links-line"></div>
+          </div>
+          <div id="mb-links-list" class="mb-links-table">
+            <span class="mb-link-row" onclick="navigator.clipboard.writeText('cvfeinn'); showToast('Copied Discord: cvfeinn');">Discord</span>
+            <a href="https://github.com/Axtero9" target="_blank" rel="noopener" class="mb-link-row">GitHub</a>
+            <a href="https://www.instagram.com/cvfeinn/" target="_blank" rel="noopener" class="mb-link-row">Instagram</a>
+            <a href="https://open.spotify.com/" target="_blank" rel="noopener" class="mb-link-row">Spotify</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MAIN 2-COLUMN SECTION (Player Column + Posts Column) -->
+    <div class="mobile-main-grid">
+      <!-- Left Column: Message Button, Video/Album Thumb, Player Actions, Tracklist Table -->
+      <div class="mobile-player-col">
+        <button class="mb-msg-btn" onclick="showToast('Message box opened ✉️');">☆ Send me a message ☆</button>
+        
+        <div class="mb-player-card">
+          <!-- Video/Album Art Thumbnail -->
+          <div class="mb-video-thumb">
+            <img id="mb-album-art" src="album.jpg" alt="Album Cover" class="mb-thumb-img">
+            <div class="mb-thumb-overlay">
+              <div id="mb-track-title" class="mb-thumb-title">Star Shopping</div>
+              <div id="mb-track-artist" class="mb-thumb-artist">Lil Peep</div>
+            </div>
+            <div class="mb-thumb-play-icon" id="mb-thumb-play-btn" onclick="togglePlay();">▶</div>
+          </div>
+
+          <!-- Play & Library Action Buttons -->
+          <div class="mb-player-actions">
+            <button id="mb-play-btn" class="mb-action-play" onclick="togglePlay();">▶ Play</button>
+            <button id="mb-library-btn" class="mb-action-library" onclick="showToast('Library: 4 tracks loaded from Audios/');">＋ Library</button>
+          </div>
+
+          <!-- Tracklist Table with All Songs Added -->
+          <table class="mb-tracklist-table">
+            <thead>
+              <tr>
+                <th style="width: 25px;">#</th>
+                <th>Tittle</th>
+                <th style="text-align: right;">Length</th>
+              </tr>
+            </thead>
+            <tbody id="mb-tracklist-body">
+              <tr class="tracklist-row active" data-index="0" onclick="window.loadTrack(0, true);">
+                <td>1.</td>
+                <td><span class="mb-track-link">Star Shopping</span></td>
+                <td style="text-align: right;">3:50</td>
+              </tr>
+              <tr class="tracklist-row" data-index="1" onclick="window.loadTrack(1, true);">
+                <td>2.</td>
+                <td><span class="mb-track-link">Dark Red</span></td>
+                <td style="text-align: right;">3:47</td>
+              </tr>
+              <tr class="tracklist-row" data-index="2" onclick="window.loadTrack(2, true);">
+                <td>3.</td>
+                <td><span class="mb-track-link">Mrs Magic</span></td>
+                <td style="text-align: right;">2:35</td>
+              </tr>
+              <tr class="tracklist-row" data-index="3" onclick="window.loadTrack(3, true);">
+                <td>4.</td>
+                <td><span class="mb-track-link">Dark Beach</span></td>
+                <td style="text-align: right;">1:33</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right Column: Posts from this user -->
+      <div class="mobile-posts-col">
+        <div class="mb-posts-header-banner">Posts from this user</div>
+        <div id="mb-posts-feed" class="mb-posts-container">
+          <div class="mb-post-card">
+            <div class="mb-post-title-pill">Hehe sim sim !! • Postado: 04:37 PM</div>
+            <div class="mb-post-body">Musica!! Jogos de moda e construção, rpg, animes/mangás, Dias chuvosos, desenhar, bl, coquette core, Saiko, Batim, etc...</div>
+          </div>
+          <div class="mb-post-card">
+            <div class="mb-post-title-pill">Eca.. não !! • Postado: 04:30 PM</div>
+            <div class="mb-post-body">Bolsominions, escola, canais de "fofoca", contas do TTK de dar opinião, scamers, bloqueio criativo, só fala da sua vida amorosa.</div>
+          </div>
+          <div class="mb-post-card">
+            <div class="mb-post-title-pill">Notes !! • Postado: 04:30 PM</div>
+            <div class="mb-post-body">Aceito recomendações de animes, mangás, músicas + kpop! séries e filmes outras que você quiser</div>
+          </div>
+        </div>
+        <div class="mb-see-more" onclick="showToast('Loaded all archived posts ✨');">See more post's from this user...</div>
+      </div>
+    </div>
+
+    <!-- 5. FOOTER -->
+    <div class="mobile-footer">
+      ( Made with Carrd )
+    </div>
+
+    <!-- 4. TWO-TONE BOTTOM STICKY BAR -->
+    <div class="mobile-sticky-bar">
+      <div class="mb-sticky-left">
+        <span>Atividade: Ouvindo Spotfy ──▶</span>
+        <a href="#" id="st-track-title" class="mb-sticky-track">Star Shopping</a>
+        <span id="st-track-artist" class="mb-sticky-artist">by Lil Peep</span>
+      </div>
+      <div class="mb-sticky-right">
+        <button id="st-play-btn" class="mb-sticky-play-btn" onclick="togglePlay();">▷</button>
+        <input type="range" id="st-scrubber" class="mb-sticky-scrubber" value="35" min="0" max="100">
+        <span id="st-time-current" class="mb-sticky-time">1:17</span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ==========================================================================
+       4. SHARED JAVASCRIPT CONFIG & LOGIC ENGINE
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       SHARED CONTENT VARIABLES (Edit content here to update both Mobile & Desktop)
+       ========================================================================== */
+    const CONFIG = {
+      username: "cvfeinn",
+      ageNote: "16 anos !!, Straight",
+      pronounNote: "pron: dy/dx",
+      tagline: "digital entity • lingering in the shadows",
+      decorativeQuote: "✦ ─ ─ ─ ⟡ loss of signal ⟡ ─ ─ ─ ✦",
+      
+      // Desktop Steam Profile Badges & Stats
+      level: 79,
+      badgeTitle: "Daeva",
+      xp: "200 XP",
+      favoriteGuideTitle: "Favorite Guide",
+      steppedText: {
+        phrase: "angel baby",
+        author: "♡cvfeinn",
+        ratingCount: "26 ratings"
+      },
+      gallerySlots: [
+        {
+          type: "cross",
+          title: "seen this Angel?",
+          img: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='260' viewBox='0 0 200 260'><rect width='200' height='260' fill='%2307070b'/><path d='M100,20 L100,240 M40,80 L160,80 M70,50 L130,110 M70,110 L130,50' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' opacity='0.75'/><circle cx='100' cy='80' r='18' stroke='%23ffffff' stroke-width='1.5' fill='none' opacity='0.85'/><text x='50%' y='92%' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-size='10' letter-spacing='2'>seen this Angel?</text></svg>"
+        },
+        {
+          type: "wings",
+          title: "celestial",
+          img: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'><rect width='260' height='260' fill='%230b0b10'/><path d='M230,60 C180,30 110,60 70,130 C30,190 40,240 60,250 C70,220 90,170 140,120 C180,80 210,70 230,60 Z' fill='%23ffffff' opacity='0.85'/><path d='M240,100 C190,80 130,110 90,170 C60,210 70,245 90,250 C100,220 120,180 160,140 C190,110 220,105 240,100 Z' fill='%238e8e9f' opacity='0.5'/></svg>"
+        },
+        {
+          type: "dict",
+          word: "angel",
+          definition: "(n.) the girl who makes your heart jump; the girl you'll need for a long time, wherever you go."
+        }
+      ],
+      stats: [
+        { label: "Inventory", value: "✦" },
+        { label: "Reviews", value: "4" },
+        { label: "Guides", value: "153" },
+        { label: "Artwork", value: "1" }
+      ],
+      groups: [
+        { name: "Angel ༉‧₊˚", members: "37 Members", icon: "🕊️" },
+        { name: ".•!•.", members: "2 Members", icon: "♰" },
+        { name: "天使", members: "4 Members", icon: "✧" }
+      ],
+
+      // Profile avatar (uses uploaded avatar.jpg)
+      avatarUrl: "avatar.jpg",
+      albumArtUrl: "album.jpg",
+
+      links: [
+        { name: "Discord", type: "text", value: "cvfeinn" },
+        { name: "GitHub", type: "url", value: "https://github.com/Axtero9" },
+        { name: "Instagram", type: "url", value: "https://www.instagram.com/cvfeinn/" },
+        { name: "Spotify", type: "url", value: "https://open.spotify.com/" }
+      ],
+
+      // Audio Tracks (Exact files Song1.mp3 to Song4.mp3 with Audios/ directory fallback)
+      audioTracks: [
+        { id: 1, title: "Star Shopping", artist: "Lil Peep", file: "Song1.mp3", fallback: "Audios/Song1.mp3", length: "3:50" },
+        { id: 2, title: "Dark Red", artist: "Steve Lacy", file: "Song2.mp3", fallback: "Audios/Song2.mp3", length: "3:47" },
+        { id: 3, title: "Mrs Magic", artist: "Strawberry Guy", file: "Song3.mp3", fallback: "Audios/Song3.mp3", length: "2:35" },
+        { id: 4, title: "Dark Beach", artist: "Pastel Ghost", file: "Song4.mp3", fallback: "Audios/Song4.mp3", length: "1:33" }
+      ],
+
+      // Mobile Tab Contents
+      tabs: {
+        date: "• Favorite weather: Rainy & cloudy evenings<br>• Current timezone: UTC-3<br>• Active hours: late night nocturnal cycle",
+        byf: "• Please be respectful & polite<br>• DMs open for cool projects & music chat<br>• Do not steal artwork or audio compositions without credit",
+        likes: "• Dark aesthetics & minimalist UIs<br>• Lo-Fi, synthwave, ambient & breakcore<br>• Retro hardware & digital art exploration"
+      },
+
+      // Posts Feed
+      posts: [
+        {
+          title: "Hehe sim sim !!",
+          time: "04:37 PM",
+          content: "Musica!! Jogos de moda e construção, rpg, animes/mangás, Dias chuvosos, desenhar, bl, coquette core, Saiko, Batim, etc..."
+        },
+        {
+          title: "Eca.. não !!",
+          time: "04:30 PM",
+          content: "Bolsominions, escola, canais de \"fofoca\", contas do TTK de dar opinião, scamers, bloqueio criativo, só fala da sua vida amorosa."
+        },
+        {
+          title: "Notes !!",
+          time: "04:30 PM",
+          content: "Aceito recomendações de animes, mangás, músicas + kpop! séries e filmes outras que você quiser"
+        }
+      ]
+    };
+
+    /* ==========================================================================
+       APPLICATION ENGINE & DOM BINDINGS
+       ========================================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // Elements
+      const audioEl = document.getElementById("shared-audio");
+      const toastEl = document.getElementById("toast");
+
+      let currentTrackIndex = 0;
+      let isPlaying = false;
+
+      // Toast Helper
+      function showToast(msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        setTimeout(() => toastEl.classList.remove("show"), 2500);
+      }
+
+      function safeSetText(id, text) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      }
+
+      function safeSetHtml(id, html) {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
+      }
+
+      function safeSetSrc(id, src) {
+        const el = document.getElementById(id);
+        if (el) el.src = src;
+      }
+
+      // Populate DOM from CONFIG
+      function hydrateProfile() {
+        // Desktop Elements
+        safeSetSrc("dt-avatar", CONFIG.avatarUrl);
+        safeSetText("dt-username", `♡${CONFIG.username} .`);
+        safeSetSrc("dt-album-art", CONFIG.albumArtUrl);
+        safeSetText("dt-level", CONFIG.level);
+        safeSetText("dt-badge-name", CONFIG.badgeTitle);
+        safeSetText("dt-xp", CONFIG.xp);
+        safeSetText("dt-fav-label", CONFIG.favoriteGuideTitle);
+        safeSetText("dt-fav-byline", CONFIG.steppedText.author);
+        safeSetText("dt-rating-count", CONFIG.steppedText.ratingCount);
+
+        // Desktop Links
+        const dtLinksRow = document.getElementById("dt-links-row");
+        if (dtLinksRow) {
+          dtLinksRow.innerHTML = CONFIG.links.map(link => {
+            if (link.type === "url") {
+              return `<a href="${link.value}" target="_blank" rel="noopener" class="desktop-link-btn">${link.name}</a>`;
+            } else {
+              return `<button class="desktop-link-btn" onclick="navigator.clipboard.writeText('${link.value}'); showToast('Copied Discord handle: ${link.value}');">${link.name}: ${link.value}</button>`;
+            }
+          }).join("");
+        }
+
+        // Desktop Gallery Slots (includes dictionary & cross graphics)
+        const dtGallery = document.getElementById("dt-gallery-strip");
+        if (dtGallery) {
+          dtGallery.innerHTML = CONFIG.gallerySlots.map(slot => {
+            if (slot.type === "dict") {
+              return `
+                <div class="gallery-item dict-card">
+                  <div class="dict-word">${slot.word}</div>
+                  <div class="dict-def">${slot.definition}</div>
+                </div>
+              `;
+            } else {
+              return `
+                <div class="gallery-item">
+                  <img src="${slot.img}" alt="${slot.title}">
+                  <div class="gallery-overlay">
+                    <div class="gallery-title">${slot.title}</div>
+                  </div>
+                </div>
+              `;
+            }
+          }).join("");
+        }
+
+        // Desktop Stats List
+        const dtStatsList = document.getElementById("dt-stats-list");
+        if (dtStatsList) {
+          dtStatsList.innerHTML = CONFIG.stats.map(s => `
+            <div class="dt-stat-row">
+              <span class="dt-stat-label">${s.label}</span>
+              <span class="dt-stat-val">${s.value}</span>
+            </div>
+          `).join("");
+        }
+
+        // Desktop Groups
+        safeSetText("dt-groups-count", CONFIG.groups.length);
+        const dtGroupsList = document.getElementById("dt-groups-list");
+        if (dtGroupsList) {
+          dtGroupsList.innerHTML = CONFIG.groups.map(g => `
+            <div class="dt-group-item">
+              <div class="dt-group-icon">${g.icon}</div>
+              <div class="dt-group-meta">
+                <div class="dt-group-name">${g.name}</div>
+                <div class="dt-group-members">${g.members}</div>
+              </div>
+            </div>
+          `).join("");
+        }
+
+        // Mobile Elements
+        safeSetSrc("mb-avatar", CONFIG.avatarUrl);
+        safeSetText("mb-username", `@${CONFIG.username}`);
+        safeSetText("mb-note-line1", `⇢ ${CONFIG.ageNote}`);
+        safeSetText("mb-note-line2", `✧ ${CONFIG.pronounNote} ! ☀️ Cancer 🌙 Peixes ↑ capri.`);
+        safeSetSrc("mb-album-art", CONFIG.albumArtUrl);
+
+        // Mobile Links Table
+        const mbLinksList = document.getElementById("mb-links-list");
+        if (mbLinksList) {
+          mbLinksList.innerHTML = CONFIG.links.map(link => {
+            if (link.type === "url") {
+              return `<a href="${link.value}" target="_blank" rel="noopener" class="mb-link-row">${link.name}</a>`;
+            } else {
+              return `<span class="mb-link-row" onclick="navigator.clipboard.writeText('${link.value}'); showToast('Copied Discord: ${link.value}');">${link.name}</span>`;
+            }
+          }).join("");
+        }
+
+        // Mobile Posts Feed
+        renderPosts();
+
+        // Render Tracklists
+        renderTracklists();
+
+        // Load Initial Track
+        loadTrack(0, false);
+      }
+
+      // Render Posts
+      function renderPosts() {
+        const mbPostsFeed = document.getElementById("mb-posts-feed");
+        if (mbPostsFeed) {
+          mbPostsFeed.innerHTML = CONFIG.posts.map(post => `
+            <div class="mb-post-card">
+              <div class="mb-post-title-pill">${post.title} • Postado: ${post.time}</div>
+              <div class="mb-post-body">${post.content}</div>
+            </div>
+          `).join("");
+        }
+      }
+
+      // Render Tracklists & Playlist Boxes
+      function renderTracklists() {
+        const dtPlaylistBoxes = document.getElementById("dt-playlist-boxes");
+        const mbBody = document.getElementById("mb-tracklist-body");
+
+        if (dtPlaylistBoxes) {
+          dtPlaylistBoxes.innerHTML = CONFIG.audioTracks.map((track, idx) => `
+            <div class="dt-song-box ${idx === currentTrackIndex ? 'active' : ''}" data-index="${idx}" onclick="window.loadTrack(${idx}, true);">
+              <div class="dt-song-box-left">
+                <span class="dt-song-box-idx">${idx + 1}</span>
+                <div class="dt-song-box-meta">
+                  <span class="dt-song-box-title">${track.title}</span>
+                  <span class="dt-song-box-artist">${track.artist}</span>
+                </div>
+              </div>
+              <div class="dt-song-box-right">
+                <span class="dt-song-box-len">${track.length}</span>
+                <span class="dt-song-box-play">${idx === currentTrackIndex && isPlaying ? '❚❚' : '▶'}</span>
+              </div>
+            </div>
+          `).join("");
+        }
+
+        if (mbBody) {
+          mbBody.innerHTML = CONFIG.audioTracks.map((track, idx) => `
+            <tr class="tracklist-row ${idx === currentTrackIndex ? 'active' : ''}" data-index="${idx}" onclick="window.loadTrack(${idx}, true);">
+              <td>${idx + 1}.</td>
+              <td><span class="mb-track-link">${track.title}</span></td>
+              <td style="text-align: right;">${track.length}</td>
+            </tr>
+          `).join("");
+        }
+
+        // Add Click handlers
+        document.querySelectorAll(".tracklist-row, .dt-song-box").forEach(el => {
+          el.addEventListener("click", () => {
+            const idx = parseInt(el.getAttribute("data-index"));
+            loadTrack(idx, true);
+          });
+        });
+      }
+
+      // Load Track Engine with Robust Fallback Handling
+      function loadTrack(index, autoPlay = false) {
+        currentTrackIndex = index;
+        const track = CONFIG.audioTracks[index];
+        if (!track) return;
+
+        // Update UI Titles
+        safeSetText("dt-track-title", track.title);
+        safeSetText("dt-track-artist", `${track.artist} • Track ${index + 1}`);
+        safeSetText("mb-track-title", track.title);
+        safeSetText("mb-track-artist", track.artist);
+        safeSetText("mb-status-playing", track.title);
+        safeSetText("st-track-title", track.title);
+        safeSetText("st-track-artist", `by ${track.artist}`);
+
+        // Highlight Active Rows & Desktop Boxes
+        document.querySelectorAll(".tracklist-row, .dt-song-box").forEach(el => {
+          const rIdx = parseInt(el.getAttribute("data-index"));
+          if (rIdx === index) {
+            el.classList.add("active");
+            const playIcon = el.querySelector(".dt-song-box-play");
+            if (playIcon) playIcon.textContent = autoPlay ? "❚❚" : "▶";
+          } else {
+            el.classList.remove("active");
+            const playIcon = el.querySelector(".dt-song-box-play");
+            if (playIcon) playIcon.textContent = "▶";
+          }
+        });
+
+        // Set Audio Source
+        audioEl.src = track.file;
+
+        if (autoPlay) {
+          const playPromise = audioEl.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              isPlaying = true;
+              updatePlayButtonsUI();
+            }).catch(e => {
+              console.warn("Primary audio source play failed, trying fallback:", track.fallback);
+              if (track.fallback) {
+                audioEl.src = track.fallback;
+                audioEl.play().then(() => {
+                  isPlaying = true;
+                  updatePlayButtonsUI();
+                }).catch(err => {
+                  console.error("Fallback play failed:", err);
+                });
+              }
+            });
+          }
+        } else {
+          isPlaying = false;
+          updatePlayButtonsUI();
+        }
+      }
+
+      // Audio State Listeners
+      audioEl.addEventListener("play", () => {
+        isPlaying = true;
+        updatePlayButtonsUI();
+      });
+
+      audioEl.addEventListener("pause", () => {
+        isPlaying = false;
+        updatePlayButtonsUI();
+      });
+
+      // Play / Pause Toggle
+      function togglePlay() {
+        if (!audioEl.src || audioEl.src.endsWith("/") || audioEl.src === window.location.href) {
+          loadTrack(currentTrackIndex, true);
+          return;
+        }
+        if (audioEl.paused) {
+          audioEl.play().catch(err => {
+            console.warn("Retrying with fallback audio...", err);
+            const track = CONFIG.audioTracks[currentTrackIndex];
+            if (track && track.fallback) {
+              audioEl.src = track.fallback;
+              audioEl.play().catch(e => console.error("Playback error:", e));
+            }
+          });
+        } else {
+          audioEl.pause();
+        }
+      }
+
+      // Expose globally for inline onclick execution
+      window.loadTrack = loadTrack;
+      window.togglePlay = togglePlay;
+
+      // Update All Play Button UIs
+      function updatePlayButtonsUI() {
+        const icon = isPlaying ? "❚❚" : "▶";
+        const dtBtn = document.getElementById("dt-play-btn");
+        if (dtBtn) dtBtn.textContent = icon;
+        const mbBtn = document.getElementById("mb-play-btn");
+        if (mbBtn) mbBtn.textContent = isPlaying ? "❚❚ Pause" : "▶ Play";
+        const thumbBtn = document.getElementById("mb-thumb-play-btn");
+        if (thumbBtn) thumbBtn.textContent = icon;
+        const stBtn = document.getElementById("st-play-btn");
+        if (stBtn) stBtn.textContent = isPlaying ? "❚❚" : "▷";
+      }
+
+      document.getElementById("mb-library-btn").addEventListener("click", () => {
+        showToast(`Library: ${CONFIG.audioTracks.length} tracks available`);
+      });
+
+      // Format Time mm:ss
+      function formatTime(secs) {
+        if (isNaN(secs) || secs < 0) return "00:00";
+        const m = Math.floor(secs / 60);
+        const s = Math.floor(secs % 60);
+        return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+      }
+
+      // Sync Audio Progress
+      audioEl.addEventListener("timeupdate", () => {
+        const current = audioEl.currentTime || 0;
+        const duration = audioEl.duration || 1;
+        const pct = (current / duration) * 100;
+
+        const timeCurrentStr = formatTime(current);
+        const timeDurStr = formatTime(duration);
+
+        // Desktop Progress
+        document.getElementById("dt-time-current").textContent = timeCurrentStr;
+        document.getElementById("dt-time-duration").textContent = timeDurStr;
+        document.getElementById("dt-scrubber").value = pct;
+
+        // Mobile Progress
+        document.getElementById("mb-time-current").textContent = timeCurrentStr;
+        document.getElementById("mb-time-duration").textContent = timeDurStr;
+        document.getElementById("mb-scrubber").value = pct;
+
+        // Sticky Bar Progress
+        document.getElementById("st-time-current").textContent = timeCurrentStr;
+        document.getElementById("st-time-duration").textContent = timeDurStr;
+        document.getElementById("st-scrubber").value = pct;
+      });
+
+      // Scrubber Seek Handlers
+      function seekAudio(pct) {
+        if (audioEl.duration) {
+          audioEl.currentTime = (pct / 100) * audioEl.duration;
+        }
+      }
+
+      document.getElementById("dt-scrubber").addEventListener("input", (e) => seekAudio(e.target.value));
+      document.getElementById("mb-scrubber").addEventListener("input", (e) => seekAudio(e.target.value));
+      document.getElementById("st-scrubber").addEventListener("input", (e) => seekAudio(e.target.value));
+
+      // Auto play next track when ended
+      audioEl.addEventListener("ended", () => {
+        const nextIdx = (currentTrackIndex + 1) % CONFIG.audioTracks.length;
+        loadTrack(nextIdx, true);
+      });
+
+      // Mobile Pill Tabs Switcher
+      document.querySelectorAll(".pill-tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          document.querySelectorAll(".pill-tab").forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          
+          const tabKey = tab.getAttribute("data-tab");
+          document.getElementById("mb-tab-header-label").textContent = tab.textContent;
+          document.getElementById("mb-tab-content").innerHTML = CONFIG.tabs[tabKey] || "";
+        });
+      });
+
+      // Mobile Theme Dots Switcher
+      document.querySelectorAll(".theme-dot").forEach(dot => {
+        dot.addEventListener("click", () => {
+          const theme = dot.getAttribute("data-theme");
+          document.body.className = theme === "default" ? "" : theme;
+          showToast(`Applied ${dot.getAttribute("title")} theme`);
+        });
+      });
+
+      // See More Posts Toggle
+      document.getElementById("mb-see-more").addEventListener("click", () => {
+        showToast("All posts loaded.");
+      });
+
+      // Initialize
+      hydrateProfile();
+      window.showToast = showToast;
+    });
+  </script>
+</body>
+</html>
