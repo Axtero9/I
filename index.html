@@ -1545,14 +1545,331 @@
         color: #000000;
       }
 
-      /* 5. FOOTER */
-      .mobile-footer {
-        text-align: center;
+      /* 5. AESTHETIC RETRO SCRAPBOOK & COLLAGE SECTION */
+      .mb-scrapbook-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 14px;
+        padding-bottom: 70px; /* spacing for fixed bottom sticky bar */
+      }
+
+      .mb-scrapbook-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #000000;
+        border: 1px dashed rgba(255, 255, 255, 0.4);
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: #ffffff;
+      }
+
+      .topbar-tag {
+        font-weight: 600;
+      }
+
+      .topbar-divider {
+        color: #888890;
+        font-size: 0.6rem;
+      }
+
+      /* Retro Windows 95 Dialog Box */
+      .mb-win95-box {
+        background: #d4d0c8;
+        border: 2px solid;
+        border-color: #ffffff #404040 #404040 #ffffff;
+        box-shadow: 1px 1px 0px #000000;
+        padding: 2px;
+        font-family: var(--font-mono);
+      }
+
+      .mb-win95-header {
+        background: #000080;
+        color: #ffffff;
+        padding: 2px 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+
+      .mb-win95-btns {
+        display: flex;
+        gap: 2px;
+      }
+
+      .win-btn {
+        background: #d4d0c8;
+        color: #000000;
+        border: 1px solid;
+        border-color: #ffffff #404040 #404040 #ffffff;
+        font-size: 0.55rem;
+        padding: 0 3px;
+        line-height: 1;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .win-btn.win-close {
+        font-weight: 900;
+      }
+
+      .mb-win95-body {
+        background: #ffffff;
+        color: #000000;
+        padding: 6px 8px;
+        font-size: 0.66rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        line-height: 1.35;
+      }
+
+      .win-line {
+        font-weight: 500;
+      }
+
+      /* Scrapbook Row 1: Manga Card + Win95 Box */
+      .mb-scrapbook-row1 {
+        display: grid;
+        grid-template-columns: 1fr 1.35fr;
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      .mb-manga-card {
+        background: #000000;
+        border: 1px solid #ffffff;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        position: relative;
+      }
+
+      .mb-manga-img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .mb-speech-bubble {
+        background: #ffffff;
+        color: #000000;
+        border-radius: 6px;
+        padding: 4px 6px;
         font-family: var(--font-sans);
-        font-size: 0.72rem;
-        color: #888894;
-        margin-top: 6px;
-        padding-bottom: 12px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      }
+
+      /* Row 2: Quote Bubble & Fangs */
+      .mb-scrapbook-row2 {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .mb-quote-bubble {
+        background: #111116;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .quote-cross {
+        font-size: 0.75rem;
+        color: #ffffff;
+      }
+
+      .quote-text {
+        font-family: var(--font-mono);
+        font-size: 0.64rem;
+        color: #e0e0e8;
+        line-height: 1.35;
+        font-style: italic;
+      }
+
+      .mb-fangs-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #08080c;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 4px;
+        padding: 6px;
+      }
+
+      .fangs-svg {
+        width: 100%;
+        max-height: 55px;
+      }
+
+      /* Likes / Dislikes Grid */
+      .mb-likes-dislikes-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        background: #0d0d12;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 4px;
+        padding: 8px;
+      }
+
+      .mb-list-col {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .list-heading {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+      }
+
+      .list-body {
+        font-family: var(--font-mono);
+        font-size: 0.56rem;
+        color: #a5a5b5;
+        line-height: 1.35;
+        word-break: break-word;
+      }
+
+      /* Manga Eyes Strip */
+      .mb-eyes-strip {
+        width: 100%;
+        border: 1px solid #ffffff;
+        overflow: hidden;
+        border-radius: 3px;
+      }
+
+      .mb-eyes-img {
+        width: 100%;
+        height: 70px;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Kinnies & Search Row */
+      .mb-kinnies-row {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 10px;
+      }
+
+      .mb-search-pill {
+        background: #000000;
+        border: 1px solid #ffffff;
+        border-radius: 20px;
+        padding: 6px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: #ffffff;
+      }
+
+      .pill-h {
+        font-weight: 800;
+        border-left: 1px solid #ffffff;
+        padding-left: 6px;
+      }
+
+      .mb-kinnies-card {
+        background: #121218;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        padding: 6px 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .kinnies-tag {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .kinnies-names {
+        font-family: var(--font-mono);
+        font-size: 0.58rem;
+        color: #b0b0be;
+        line-height: 1.25;
+      }
+
+      /* Bottom Badges */
+      .mb-scrapbook-footer-badges {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding-top: 4px;
+      }
+
+      .mb-speech-pill {
+        background: #000000;
+        color: #ffffff;
+        border: 1.5px solid #ffffff;
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        font-weight: 700;
+      }
+
+      .mb-cross-art {
+        font-size: 1.2rem;
+        color: #ffffff;
+        text-shadow: 0 0 8px rgba(255,255,255,0.8);
+      }
+
+      .mb-parental-badge {
+        border: 1.5px solid #ffffff;
+        padding: 2px 4px;
+        text-align: center;
+        background: #000000;
+        font-family: 'Arial Black', sans-serif;
+        line-height: 1;
+      }
+
+      .pa-line1 {
+        font-size: 0.46rem;
+        letter-spacing: 1px;
+        color: #ffffff;
+      }
+
+      .pa-line2 {
+        font-size: 0.62rem;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        color: #ffffff;
+      }
+
+      .pa-line3 {
+        font-size: 0.38rem;
+        letter-spacing: 0.5px;
+        color: #ffffff;
+        border-top: 1px solid #ffffff;
+        margin-top: 1px;
+        padding-top: 1px;
       }
     }
   </style>
@@ -1966,9 +2283,147 @@
       </div>
     </div>
 
-    <!-- 5. FOOTER -->
-    <div class="mobile-footer">
-      ( Made with Carrd )
+    <!-- 5. AESTHETIC RETRO SCRAPBOOK & COLLAGE SECTION -->
+    <div class="mb-scrapbook-section">
+      
+      <!-- Top Decorative Bar -->
+      <div class="mb-scrapbook-topbar">
+        <div class="topbar-tag">[ I ❤️ my gf ]</div>
+        <div class="topbar-divider">── ❖ ──</div>
+        <div class="topbar-tag">[ 🏙️ night person 🏙️ ]</div>
+      </div>
+
+      <!-- Row 1: Manga Card + Retro Windows 95 Box -->
+      <div class="mb-scrapbook-row1">
+        <!-- Manga Character Box with Speech Bubble -->
+        <div class="mb-manga-card">
+          <img src="manga_panel.jpg" alt="Manga" class="mb-manga-img">
+          <div class="mb-speech-bubble">How much do you love her?</div>
+        </div>
+
+        <!-- Retro Windows 95 Dialog <3 -->
+        <div class="mb-win95-box">
+          <div class="mb-win95-header">
+            <span class="mb-win95-title">&lt;3</span>
+            <div class="mb-win95-btns">
+              <span class="win-btn">_</span>
+              <span class="win-btn">🗖</span>
+              <span class="win-btn win-close">✕</span>
+            </div>
+          </div>
+          <div class="mb-win95-body">
+            <div class="win-line">► Ash / Asher / Sunshine / Sunny</div>
+            <div class="win-line">► He / Him / She / Her (Male pref.)</div>
+            <div class="win-line">► Teenager / Minor</div>
+            <div class="win-line">► Straight</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote Snippet & Monster Fangs Row -->
+      <div class="mb-scrapbook-row2">
+        <div class="mb-quote-bubble">
+          <div class="quote-cross">♰ 🪶</div>
+          <p class="quote-text">
+            when she loves yapping, she's shorter than me, she's funny, she's smart, her eyes are beautiful, her smile is adorable and matches my humor
+          </p>
+        </div>
+        <div class="mb-fangs-box">
+          <svg viewBox="0 0 100 60" class="fangs-svg">
+            <path d="M10,20 Q50,5 90,20 Q85,45 50,55 Q15,45 10,20 Z" fill="#000" stroke="#fff" stroke-width="1.5"/>
+            <polygon points="18,20 23,34 28,20" fill="#fff"/>
+            <polygon points="30,20 36,42 42,20" fill="#fff"/>
+            <polygon points="44,20 50,45 56,20" fill="#fff"/>
+            <polygon points="58,20 64,42 70,20" fill="#fff"/>
+            <polygon points="72,20 77,34 82,20" fill="#fff"/>
+            <polygon points="22,40 27,26 32,40" fill="#fff"/>
+            <polygon points="35,45 40,28 45,45" fill="#fff"/>
+            <polygon points="47,46 52,29 57,46" fill="#fff"/>
+            <polygon points="59,45 64,28 69,45" fill="#fff"/>
+            <polygon points="70,40 75,26 80,40" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Retro Windows Dialog BYI (°0°)!! -->
+      <div class="mb-win95-box">
+        <div class="mb-win95-header">
+          <span class="mb-win95-title">BYI (°0°)!!</span>
+          <div class="mb-win95-btns">
+            <span class="win-btn">_</span>
+            <span class="win-btn">🗖</span>
+            <span class="win-btn win-close">✕</span>
+          </div>
+        </div>
+        <div class="mb-win95-body">
+          <div class="win-line">► I don't always text back immediately 🐱</div>
+          <div class="win-line">► please don't sexualize me unless I know its a joke</div>
+          <div class="win-line">► I can only call on my computer</div>
+        </div>
+      </div>
+
+      <!-- Dislikes / Likes 2-Column Grid -->
+      <div class="mb-likes-dislikes-grid">
+        <div class="mb-list-col dislikes">
+          <div class="list-heading">DISLIKES:</div>
+          <div class="list-body">
+            BUGS, AI "ART", GENDER DYSMORPHIA, ONLINE TALKING, RUNNING, FEET, BEING PRESSURED, COUGHING, DEPRESSION, SOCIAL INJUSTICE, CRINGE CULTURE, FREELOADERS IN SCHOOL PROJECTS, OILY FOOD, BEING STARTLED, BAD HAIR DAYS, SLOW WALKERS, BOREDOM, ETC.
+          </div>
+        </div>
+        <div class="mb-list-col likes">
+          <div class="list-heading">LIKES:</div>
+          <div class="list-body">
+            MY WIFE, MILO, LANI, KYLIE, BLAIRE, ALEX, LEARNING ABT RELIGIONS, DRAWING, SKATEBOARDING, TRUE CRIME, HORROR GAMES, FASHION, MUSIC, EXPLORING OUTSIDE W/ FRIENDS, FOOD, ANIME, PARTIES W/ FRIENDS, ROLLERCOASTERS, WATER RIDES, MANGA, PLUSHIES, SNAKES, SHARKS, FERRETS, IRL TALKING, ETC.
+          </div>
+        </div>
+      </div>
+
+      <!-- Retro Windows Dialog DNI (¬_¬) ... -->
+      <div class="mb-win95-box">
+        <div class="mb-win95-header">
+          <span class="mb-win95-title">DNI (¬_¬) ...</span>
+          <div class="mb-win95-btns">
+            <span class="win-btn">_</span>
+            <span class="win-btn">🗖</span>
+            <span class="win-btn win-close">✕</span>
+          </div>
+        </div>
+        <div class="mb-win95-body">
+          <div class="win-line">► If you bully</div>
+          <div class="win-line">► If homophobic or transphobic</div>
+          <div class="win-line">► If you support zoophilia, pedophilia, ableism, racism, or sexism</div>
+          <div class="win-line">► If you sexualize rape culture or support it</div>
+        </div>
+      </div>
+
+      <!-- Manga Eyes Strip -->
+      <div class="mb-eyes-strip">
+        <img src="manga_eyes.jpg" alt="Manga Eyes" class="mb-eyes-img">
+      </div>
+
+      <!-- Search Pill & Kinnies Card -->
+      <div class="mb-kinnies-row">
+        <div class="mb-search-pill">
+          <span>an angel?</span>
+          <span class="pill-h">H</span>
+        </div>
+        <div class="mb-kinnies-card">
+          <div class="kinnies-tag">༓ : KINNIES ˚⊹</div>
+          <div class="kinnies-names">YUJI ITADORI, REKI KYAN, DAISUKE, "HIKARU"</div>
+        </div>
+      </div>
+
+      <!-- Bottom Badges: Loser pill + Cross + Parental Advisory -->
+      <div class="mb-scrapbook-footer-badges">
+        <div class="mb-speech-pill">Oh, look! A loser</div>
+        <div class="mb-cross-art">♰</div>
+        <div class="mb-parental-badge">
+          <div class="pa-line1">PARENTAL</div>
+          <div class="pa-line2">ADVISORY</div>
+          <div class="pa-line3">EXPLICIT CONTENT</div>
+        </div>
+      </div>
+
     </div>
 
     <!-- 4. TWO-TONE BOTTOM STICKY BAR -->
